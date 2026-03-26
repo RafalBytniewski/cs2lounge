@@ -5,7 +5,880 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+    --bg: #13181f;
+    --bg-deep: #0b0f14;
+    --panel: #1b232d;
+    --panel-2: #202b36;
+    --panel-3: #273341;
+    --line: #354250;
+    --text: #d8e0e8;
+    --muted: #8896a3;
+    --accent: #ffb02e;
+    --accent-2: #ffd36f;
+    --green: #62d27c;
+    --red: #f26a5f;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+    --font-sans: 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Teko', Impact, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: var(--font-sans);
+    background:
+        radial-gradient(circle at top, rgba(255, 176, 46, 0.14), transparent 32%),
+        linear-gradient(180deg, #18212b 0%, #10151b 48%, #0a0e12 100%);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 85%);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+.page-shell {
+    width: min(1480px, calc(100% - 24px));
+    margin: 0 auto;
+    padding: 18px 0 32px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(39, 50, 63, 0.94), rgba(19, 25, 32, 0.96));
+    box-shadow: var(--shadow);
+}
+
+.brand-lockup,
+.top-actions,
+.profile-box,
+.team-block,
+.match-meta,
+.match-footer,
+.trade-row,
+.bet-row,
+.thread-row,
+.menu-link,
+.match-main,
+.compact-stats,
+.profile-metrics,
+.hero-stats,
+.panel-heading {
+    display: flex;
+    align-items: center;
+}
+
+.brand-lockup {
+    gap: 12px;
+}
+
+.brand-mark {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    letter-spacing: 0.08em;
+    color: #101317;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    line-height: 0.9;
+}
+
+.brand-tag {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+.top-nav {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #b9c3cc;
+}
+
+.top-nav a:hover,
+.panel-heading a:hover,
+.action-link:hover {
+    color: var(--accent-2);
+}
+
+.top-actions {
+    gap: 12px;
+}
+
+.status-pill,
+.sign-in,
+.badge,
+.trade-value,
+.notice,
+.action-link {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-pill,
+.sign-in {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.sign-in {
+    background: linear-gradient(180deg, #f3bb4d, #d48a12);
+    color: #181107;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr) 290px;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.trade-layout {
+    grid-template-columns: 250px minmax(0, 1fr) 300px;
+}
+
+.rail,
+.content-column,
+.section-stack,
+.double-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.panel {
+    padding: 18px;
+    background: linear-gradient(180deg, rgba(34, 44, 55, 0.96), rgba(22, 29, 36, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.panel-heading {
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-heading h2 {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.panel-heading a,
+.mini-label,
+.feed-time,
+.match-subtitle,
+.profile-subtitle,
+.notice p,
+.bet-row span,
+.trade-subtitle,
+.hero-copy,
+.hero-stats span,
+.odds span {
+    color: var(--muted);
+}
+
+.menu-link {
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.035);
+    border-left: 3px solid transparent;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.menu-link span,
+.trade-value,
+.compact-stats span,
+.badge {
+    font-weight: 700;
+}
+
+.menu-link.active,
+.menu-link:hover {
+    border-left-color: var(--accent);
+    background: rgba(255, 176, 46, 0.08);
+}
+
+.mini-card,
+.notice,
+.match-card.compact,
+.trade-row,
+.thread-row,
+.bet-row {
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mini-card h3,
+.match-title,
+.trade-title,
+.profile-name {
+    font-size: 1.2rem;
+}
+
+.feed-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    color: #c3ccd4;
+}
+
+.feed-time {
+    display: inline-block;
+    min-width: 2rem;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 24px;
+    align-items: end;
+    background:
+        linear-gradient(130deg, rgba(255, 176, 46, 0.16), transparent 42%),
+        linear-gradient(180deg, rgba(42, 55, 68, 0.98), rgba(21, 27, 34, 0.98));
+}
+
+.eyebrow {
+    margin-bottom: 10px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+}
+
+.hero h1 {
+    max-width: 12ch;
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.hero-copy {
+    max-width: 58ch;
+    margin-top: 12px;
+    font-size: 1.1rem;
+}
+
+.hero-stats {
+    gap: 12px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.hero-stats div,
+.profile-metrics div,
+.odds {
+    flex: 1;
+    min-width: 78px;
+    padding: 14px 12px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stats strong,
+.profile-metrics strong,
+.odds strong {
+    display: block;
+    font-size: 1.45rem;
+}
+
+.match-card {
+    display: grid;
+    gap: 16px;
+}
+
+.match-card.featured {
+    padding: 18px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+        linear-gradient(180deg, #222e3a, #182029);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.match-meta {
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+.badge {
+    padding: 4px 8px;
+    color: #111;
+    background: #c9d1db;
+}
+
+.badge.live {
+    background: var(--accent);
+}
+
+.match-main {
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.team-block {
+    gap: 14px;
+    flex: 1;
+}
+
+.team-block-right {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.team-logo,
+.avatar {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    background: linear-gradient(180deg, #364250, #222b35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.team-logo.gold {
+    background: linear-gradient(180deg, #f0b948, #c98813);
+    color: #161109;
+}
+
+.team-block h3 {
+    font-size: 1.7rem;
+    text-transform: uppercase;
+}
+
+.versus {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--accent-2);
+    letter-spacing: 0.08em;
+}
+
+.match-footer {
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.action-link {
+    padding: 14px 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255, 176, 46, 0.08);
+}
+
+.matches-list {
+    display: grid;
+    gap: 12px;
+}
+
+.match-card.compact,
+.trade-row,
+.bet-row,
+.thread-row {
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.match-card.compact,
+.trade-row,
+.bet-row,
+.thread-row,
+.profile-metrics {
+    display: flex;
+}
+
+.compact-stats {
+    gap: 16px;
+    color: var(--accent-2);
+    white-space: nowrap;
+}
+
+.double-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.profile-box {
+    gap: 12px;
+}
+
+.avatar {
+    background: linear-gradient(180deg, #58a8ff, #245a93);
+}
+
+.profile-metrics {
+    gap: 10px;
+}
+
+.profile-metrics div {
+    text-align: center;
+}
+
+.notice.warning {
+    border-color: rgba(255, 176, 46, 0.35);
+    background: rgba(255, 176, 46, 0.08);
+}
+
+.positive {
+    color: var(--green);
+}
+
+.negative {
+    color: var(--red);
+}
+
+.tag-grid,
+.want-options,
+.builder-footer,
+.builder-grid,
+.trade-side-head,
+.offer-user,
+.offer-trade,
+.trade-form,
+.form-stack {
+    display: flex;
+}
+
+.tag-grid,
+.want-options {
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-tag,
+.want-pill {
+    padding: 10px 12px;
+    font: inherit;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-tag.active,
+.want-pill.active,
+.primary-link {
+    background: linear-gradient(180deg, rgba(255, 176, 46, 0.22), rgba(255, 176, 46, 0.08));
+    border-color: rgba(255, 176, 46, 0.4);
+}
+
+.trade-builder {
+    gap: 20px;
+}
+
+.trade-form,
+.form-stack {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.builder-grid {
+    align-items: stretch;
+    gap: 16px;
+}
+
+.trade-side {
+    flex: 1;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.trade-side-head {
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.trade-side-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.trade-side-head span,
+.skin-meta,
+.skin-placeholder,
+.offer-label,
+.offer-block small {
+    color: var(--muted);
+}
+
+.trade-arrow,
+.offer-swap {
+    align-self: center;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+}
+
+.skin-grid,
+.offer-list {
+    display: grid;
+    gap: 12px;
+}
+
+.skin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.skin-card {
+    position: relative;
+    min-height: 108px;
+    padding: 16px 14px 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.skin-card.selectable {
+    cursor: pointer;
+}
+
+.skin-check,
+.want-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skin-check:checked + .skin-rarity,
+.want-choice input:checked + .want-pill {
+    box-shadow: 0 0 0 2px rgba(255, 176, 46, 0.25);
+}
+
+.skin-card.selectable:has(.skin-check:checked) {
+    border-color: rgba(255, 176, 46, 0.42);
+    background: linear-gradient(180deg, rgba(255, 176, 46, 0.18), rgba(255, 176, 46, 0.05));
+}
+
+.skin-card.selected {
+    box-shadow: inset 0 0 0 1px rgba(98, 210, 124, 0.3);
+}
+
+.skin-card.wanted {
+    box-shadow: inset 0 0 0 1px rgba(255, 176, 46, 0.3);
+}
+
+.skin-card.ghost {
+    display: grid;
+    place-items: center;
+    border-style: dashed;
+}
+
+.skin-rarity {
+    display: block;
+    width: 38px;
+    height: 4px;
+    margin-bottom: 12px;
+    background: #7e8791;
+}
+
+.skin-rarity.covert {
+    background: #eb4b4b;
+}
+
+.skin-rarity.classified {
+    background: #d32ce6;
+}
+
+.skin-rarity.knife {
+    background: #ffb02e;
+}
+
+.skin-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.skin-price {
+    margin-top: 10px;
+    color: var(--accent-2);
+    font-weight: 700;
+}
+
+.builder-footer {
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.trade-summary strong {
+    display: block;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.offer-card {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.offer-user {
+    gap: 12px;
+}
+
+.offer-trade {
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.offer-block {
+    flex: 1;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.wanted-block {
+    border-color: rgba(255, 176, 46, 0.2);
+}
+
+.offer-label {
+    display: block;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.9rem;
+}
+
+.offer-block p {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.field-group {
+    display: grid;
+    gap: 8px;
+}
+
+.field-group span {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.text-input {
+    width: 100%;
+    padding: 12px 14px;
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.text-input:focus {
+    border-color: rgba(255, 176, 46, 0.42);
+}
+
+.text-area {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.flash-message {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.flash-success {
+    background: rgba(98, 210, 124, 0.1);
+    border-color: rgba(98, 210, 124, 0.32);
+}
+
+.flash-error {
+    background: rgba(242, 106, 95, 0.1);
+    border-color: rgba(242, 106, 95, 0.32);
+}
+
+.error-list {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.button-reset {
+    cursor: pointer;
+}
+
+@media (max-width: 1180px) {
+    .layout-grid {
+        grid-template-columns: 240px minmax(0, 1fr);
+    }
+
+    .right-rail {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .offer-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .page-shell {
+        width: min(100% - 16px, 1480px);
+    }
+
+    .hero,
+    .double-panel,
+    .right-rail {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar,
+    .match-main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .top-nav,
+    .top-actions,
+    .hero-stats,
+    .match-footer {
+        justify-content: flex-start;
+    }
+
+    .layout-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .team-block-right {
+        justify-content: space-between;
+        text-align: left;
+        flex-direction: row-reverse;
+    }
+
+    .versus {
+        align-self: center;
+    }
+
+    .double-panel,
+    .right-rail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .builder-grid,
+    .offer-trade {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 640px) {
+    .panel,
+    .topbar {
+        padding: 14px;
+    }
+
+    .brand-name {
+        font-size: 1.7rem;
+    }
+
+    .hero h1 {
+        max-width: none;
+    }
+
+    .match-card.compact,
+    .trade-row,
+    .bet-row,
+    .thread-row,
+    .profile-metrics {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .compact-stats {
+        white-space: normal;
+    }
 }
